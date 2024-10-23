@@ -224,7 +224,7 @@ export default function Portfolio() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col items-center space-y-4"
+            className="flex flex-col items-center space-y-10"
           >
             <Dialog open={isContactOpen} onOpenChange={setIsContactOpen}>
               <DialogTrigger asChild>
@@ -258,7 +258,7 @@ export default function Portfolio() {
                 </form>
               </DialogContent>
             </Dialog>
-            <div className="flex justify-center space-x-6 mt-4">
+            <div className="flex justify-center space-x-6">
               <a
                 href="mailto:your.email@example.com"
                 className="text-muted-foreground hover:text-primary transition-colors"
