@@ -107,7 +107,7 @@ const AIChatbox: React.FC = () => {
           <CardHeader className="flex flex-row items-center justify-between p-2 bg-primary text-primary-foreground">
             <CardTitle className="flex items-center space-x-2 text-lg">
               <Lamp className="w-4 h-4" />
-              <span>Genie</span>
+              <span>Bharathan's Genie</span>
             </CardTitle>
             <div className="flex items-center space-x-2">
               <Button variant="ghost" size="sm" onClick={toggleExpand} className="text-primary-foreground hover:bg-primary/90">
@@ -148,7 +148,8 @@ const AIChatbox: React.FC = () => {
               <Input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask Genie..."
+                placeholder="Ask anything about Bharathan"
+                /* placeholder="Ask Genie..." */
                 className="flex-grow"
               />
               <Button type="submit" disabled={isLoading}>
