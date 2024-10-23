@@ -142,7 +142,7 @@ export default function Portfolio() {
     console.log("Form submitted");
     setIsContactOpen(false);
   };
-
+/* Testing */
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
       {/* Navigation */}
@@ -224,8 +224,8 @@ export default function Portfolio() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col items-center space-y-10"
-          >
+            className="flex flex-col items-center space-y-8"
+          >  
             <Dialog open={isContactOpen} onOpenChange={setIsContactOpen}>
               <DialogTrigger asChild>
                 <Button>Get in Touch</Button>
