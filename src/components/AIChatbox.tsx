@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Lamp, Maximize2, Minimize2, Minus, Trash, ArrowRight } from 'lucide-react';
+import { Lamp, Maximize2, Minimize2, Minus, Trash, ArrowRight, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 
@@ -67,30 +67,21 @@ const AIChatbox: React.FC = () => {
     <div className={`fixed ${isExpanded ? 'inset-0 flex items-center justify-center bg-black bg-opacity-50' : 'bottom-4 right-4'}`}>
       {!isOpen && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            duration: 0.5,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut"
-          }}
-          className="absolute bottom-24 right-24 bg-gradient-to-r from-primary to-secondary text-primary-foreground font-bold py-2 px-4 rounded-full shadow-lg flex items-center overflow-hidden"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="absolute bottom-20 right-20"
         >
-          <span className="relative z-10 text-lg">Try Now</span>
           <motion.div
-            initial={{ x: -100 }}
-            animate={{ x: 100 }}
-            transition={{
-              repeat: Infinity,
-              duration: 1.5,
-              ease: "linear"
-            }}
-            className="absolute inset-0 z-0"
+            whileHover={{ scale: 1.05 }}
+            className="bg-blue-600 rounded-full shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer animate-pulse"
+            onClick={() => setIsOpen(true)}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 w-1/2" />
+            <div className="px-3 py-1.5 text-white font-medium text-xs rounded-full flex items-center space-x-1">
+              <span>Try This</span>
+              <Sparkles className="w-2.5 h-2.5 ml-0.5" />
+            </div>
           </motion.div>
-          <ArrowRight className="ml-2 w-5 h-5 relative z-10" />
         </motion.div>
       )}
       {!isOpen ? (

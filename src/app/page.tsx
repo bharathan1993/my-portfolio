@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import AIChatbox from '@/components/AIChatbox';
@@ -32,104 +32,121 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
 
+const MotionSpan = motion.span;
+
 export default function Portfolio() {
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [animationKey, setAnimationKey] = useState(0);
 
   const skills = [
-    "React",
-    "Next.js",
-    "TypeScript",
-    "Node.js",
-    "Express",
-    "MongoDB",
-    "PostgreSQL",
-    "GraphQL",
+    "Solution Consulting",
+    "Customer Success Management",
+    "SQL",
     "REST APIs",
-    "Tailwind CSS",
-    "Sass",
-    "Framer Motion",
-    "Jest",
-    "Cypress",
-    "Git",
-    "Docker",
+    "Product Configuration",
+    "Technical Communication",
+    "Business Development",
+    "Trend Analysis",
+    "Java (Basic)",
+    "Python (Basic)",
+    "Strategic Planning",
+    "Workshop Facilitation",
+    "Zuora Billing",
+    "Architecture Design",
+    "Product Webinars",
+    "Business Presentations"
   ];
 
   const projects = [
     {
-      title: "E-commerce Platform",
+      title: "ATM Fraud Prevention System(2014)",
       description:
-        "A full-stack e-commerce solution with real-time inventory management.",
-      technologies: ["React", "Node.js", "MongoDB", "Socket.io"],
+        "A mobile application aimed at reducing ATM fraud by preventing PIN hacking and skimming technology. The project was selected for a competition conducted by TANSCST.",
+      technologies: ["Arudino", "Android", "Java", "Bluetooth","IoT","Embedded Systems"],
       link: "https://github.com/yourusername/ecommerce-platform",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/pr1.jpeg?height=600&width=400",
     },
     {
-      title: "Task Management App",
+      title: "A Study on Agile Project Management Practices in IT Industries(2016)",
       description:
-        "A Kanban-style task management application with team collaboration features.",
-      technologies: ["Next.js", "TypeScript", "PostgreSQL", "GraphQL"],
+        "An analysis of bottlenecks faced by IT firms and the applicability of agile project management practices to enhance efficiency in software development.",
+      technologies: ["Kanban", "Lean Software Development", "Extreme Programming", "Dynamic Systems Development Method(DSDM)"],
       link: "https://github.com/yourusername/task-management-app",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/pr2.jpeg?height=300&width=400",
     },
     {
-      title: "Weather Dashboard",
+      title: "X Culture Project(2016)",
       description:
-        "An interactive weather dashboard with location-based forecasts and historical data.",
-      technologies: ["React", "D3.js", "OpenWeatherMap API"],
+        "A market expansion initiative for Sacona Entertainment’s 3D game balls, focusing on identifying new markets and developing entry and marketing strategies for overseas products.",
+technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
       link: "https://github.com/yourusername/weather-dashboard",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/pr3.jpeg?height=300&width=400",
     },
   ];
 
   const certificates = [
     {
-      title: "AWS Certified Solutions Architect",
-      issuer: "Amazon Web Services",
+      title: "Zuora Billing Solution Architect",
+      issuer: "Zuora University",
+      date: "2024",
+      link: "https://certifiedimplementer.zuora.com/d0a0caf9-c9d0-48ef-80c4-89db20a7561f",
+    },
+    {
+      title: "Zuora Billing Delivery Architect",
+      issuer: "Zuora University",
       date: "2023",
-      link: "https://www.yourverificationlink.com",
+      link: "https://certifiedimplementer.zuora.com/30929eeb-e4ca-40a1-91d2-dc0f299a29d8#acc.mPalTEkz",
     },
     {
-      title: "Google Professional Cloud Developer",
-      issuer: "Google Cloud",
+      title: "Zuora Billing Analyst",
+      issuer: "Zuora University",
       date: "2022",
-      link: "https://www.yourverificationlink.com",
+      link: "https://certifiedimplementer.zuora.com/3a1267c4-c041-4311-bdd5-977392737c4e#acc.jzdNv92x",
     },
     {
-      title: "Certified Kubernetes Administrator",
-      issuer: "Cloud Native Computing Foundation",
-      date: "2021",
-      link: "https://www.yourverificationlink.com",
+      title: "ITIL® Foundation Certificate",
+      issuer: "AXELOS Global Best Practice",
+      date: "2022",
+      link: "https://drive.google.com/file/d/1HmZMCUgvJTJ0YmVKpDuoLv69wE4zgiWU/view",
     },
+    {
+      title: "RPA Business Analyst",
+      issuer: "UI Path",
+      date: "2018",
+      link: "https://drive.google.com/file/d/1fXcEOffeNZ6w6j1fDAdJgXo70Mz-UL5Q/view",
+    },
+    {
+      title: "Automation Essentials",
+      issuer: "WorkFusion",
+      date: "2017",
+      link: "https://www.credential.net/41298822-e552-4a5b-9dd1-9048096b918a#acc.OGpJRnYr",
+    }
   ];
 
   const experience = [
     {
       title: "Technical Account Manager",
-      company: "Tech Solutions Inc.",
-      period: "2021 - Present",
+      company: "Zuora Inc.",
+      period: "March 2021 - Present",
       description:
-        "Manage key client relationships and drive technical solutions.",
-    },
+        "Drive technical solutions and manage key client relationships for strategic, enterprise, and mid-market accounts. Conduct product workshops, collaborate with product engineers, and design tailored technical solutions."},
     {
-      title: "Customer Success Manager",
-      company: "Cloud Innovations Ltd.",
-      period: "2018 - 2021",
-      description:
-        "Ensured client satisfaction and adoption of cloud technologies.",
-    },
+      title: "Customer Success Engineer",
+      company: "Zoho Corporation Pvt Ltd.",
+      period: "March 2019 - March 2021",
+      description: "Supported a range of SaaS products by understanding client needs, assisting sales, and conducting product webinars. Collaborated with product management and engineering teams to enhance user experience and improve product efficacy."},
     {
-      title: "Presales Engineer",
-      company: "Software Systems Co.",
-      period: "2015 - 2018",
-      description: "Provided technical expertise during the sales process.",
-    },
+      title: "Associate Business Analyst",
+      company: "Changepond Technologies",
+      period: "August 2016 - February 2019",
+      description: "Managed the presales lifecycle by decoding requirements and conducting client clarification sessions. Developed RFP documentation and created impactful sales presentations. Collaborated with marketing to align strategies with organizational goals and prepared Business Requirement Documents with cross-functional teams. Assisted the CTO in responding to RFIs, RFPs, and RFQs, and highlighted the company’s technical capabilities through presentations."},
   ];
 
   const sections = [
-    { id: "hero", title: "Home" },
+    { id: "home", title: "Home" },
     { id: "about", title: "About" },
     { id: "skills", title: "Skills" },
-    { id: "experience", title: "Experience" },
+    { id: "experience", title: "Experience" }, // Added this line
     { id: "projects", title: "Projects" },
     { id: "certificates", title: "Certificates" },
     { id: "contact", title: "Contact" },
@@ -141,6 +158,18 @@ export default function Portfolio() {
     // such as sending the data to an API
     console.log("Form submitted");
     setIsContactOpen(false);
+  };
+
+  const resetAnimation = () => {
+    setAnimationKey(prevKey => prevKey + 1);
+  };
+
+  const handleNavClick = (sectionId: string) => {
+    if (sectionId === "home") {
+      resetAnimation();
+    }
+    // Smooth scroll to the section
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
   };
 /* Testing */
   return (
@@ -154,7 +183,7 @@ export default function Portfolio() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="text-2xl font-bold">Bharathan</span>
+              <span className="text-2xl font-bold">Who I Am</span>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 20 }}
@@ -167,6 +196,10 @@ export default function Portfolio() {
                   key={section.id}
                   href={`#${section.id}`}
                   className="hover:text-primary transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(section.id);
+                  }}
                 >
                   {section.title}
                 </a>
@@ -178,11 +211,12 @@ export default function Portfolio() {
 
       {/* Hero Section */}
       <section
-        id="hero"
+        id="home"
         className="relative h-[calc(100vh-64px)] flex items-center justify-center"
       >
         <div className="container mx-auto px-6 text-center">
           <motion.div
+            key={`image-${animationKey}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -196,35 +230,38 @@ export default function Portfolio() {
               className="rounded-full mx-auto"
             />
           </motion.div>
-          <motion.p
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-lg mb-2"
-          >
-            Bharathan Alwarsamy
-          </motion.p>
           <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
+            key={`text-${animationKey}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
             className="text-5xl md:text-6xl font-bold mb-4"
           >
-            Hi, I&apos;m Bharathan
+            {"Hi, I'm Bharathan".split("").map((char, index) => (
+              <MotionSpan
+                key={`${char}-${index}-${animationKey}`}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </MotionSpan>
+            ))}
           </motion.h1>
           <motion.p
+            key={`subtitle-${animationKey}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl md:text-2xl mb-8 text-muted-foreground"
           >
-            Technical Account Manager | Full Stack Enthusiast
+            Technical Account Manager | AI Enthusiast 
           </motion.p>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col items-center space-y-8"
+            className="flex flex-col items-center space-y-16" // Increased space-y to 16
           >  
             <Dialog open={isContactOpen} onOpenChange={setIsContactOpen}>
               <DialogTrigger asChild>
@@ -258,16 +295,19 @@ export default function Portfolio() {
                 </form>
               </DialogContent>
             </Dialog>
+            
             <div className="flex justify-center space-x-6">
               <a
-                href="mailto:your.email@example.com"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=itzbharathan@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
                 aria-label="Email"
               >
                 <Mail className="w-8 h-8" />
               </a>
               <a
-                href="https://github.com/yourusername"
+                href="https://github.com/bharathan1993"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
@@ -276,7 +316,7 @@ export default function Portfolio() {
                 <Github className="w-8 h-8" />
               </a>
               <a
-                href="https://linkedin.com/in/yourusername"
+                href="https://www.linkedin.com/in/bharathan1993/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
@@ -298,11 +338,11 @@ export default function Portfolio() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-3xl font-bold mb-8 text-center"
+            className="text-3xl font-bold mb-16 text-center" // Increased mb-12 to mb-16
           >
             About Me
           </motion.h2>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-16"> {/* Added mb-16 for bottom margin */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -315,7 +355,7 @@ export default function Portfolio() {
                 alt="About Me"
                 width={300}
                 height={400}
-                className="rounded-lg shadow-lg"
+                className="rounded-lg shadow-lg mx-auto"
               />
             </motion.div>
             <motion.div
@@ -326,28 +366,13 @@ export default function Portfolio() {
               className="w-full md:w-2/3"
             >
               <p className="text-lg mb-6 text-muted-foreground">
-                With a solid foundation in presales, customer success, and
-                currently excelling as a Technical Account Manager, I bring a
-                unique blend of technical expertise and strategic business
-                insight. My passion lies in bridging the gap between technology
-                and business, ensuring that innovative solutions align
-                seamlessly with client needs. Throughout my career, I have
-                thrived on driving results, fostering long-lasting
-                relationships, and delivering tangible value. I am dedicated to
-                helping clients unlock growth by offering tailored solutions
-                that address both immediate challenges and long-term goals.
-                Let&apos;s connect and collaborate on driving success together!
+                I'm Bharathan Alwarsamy, a Solution Consultant and Technical Account Manager with over seven years in SaaS consulting and business development. At Zuora Inc., I help enterprise and mid-market clients optimize their order-to-cash workflows through tailored solutions and best practices.
               </p>
               <p className="text-lg mb-6 text-muted-foreground">
-                I specialize in creating responsive and intuitive user
-                interfaces using React and enhancing them with smooth
-                animations. On the server-side, I&apos;m proficient with Node.js
-                and have experience with both SQL and NoSQL databases.
+                Previously, as a Customer Success Engineer at Zoho, I worked across CRM, analytics, and project management tools, bridging customer needs with product teams to enhance user experience. This role sharpened my technical and communication skills, building a foundation for impactful client partnerships.
               </p>
               <p className="text-lg text-muted-foreground">
-                When I&apos;m not coding, you can find me exploring new tech,
-                contributing to open-source projects, or sharing my knowledge
-                through tech blogs.
+                With skills in SQL, REST APIs, and a background in Python, I blend technical expertise with strategic insight. I hold an MBA in Operations and a degree in Computer Science, and I'm passionate about continuous growth and delivering value-driven solutions.
               </p>
             </motion.div>
           </div>
@@ -357,7 +382,7 @@ export default function Portfolio() {
 
       {/* Skills Section */}
       <section id="skills" className="relative py-20 bg-secondary/20">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-6 pb-16">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -376,9 +401,9 @@ export default function Portfolio() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card>
-                  <CardContent className="flex items-center justify-center h-20">
-                    <span className="text-lg font-semibold">{skill}</span>
+                <Card className="h-full"> {/* Add h-full to make the card take full height */}
+                  <CardContent className="flex items-center justify-center h-full p-4"> {/* Add h-full and adjust padding */}
+                    <span className="text-lg font-semibold text-center">{skill}</span>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -390,7 +415,7 @@ export default function Portfolio() {
 
       {/* Experience Section */}
       <section id="experience" className="relative py-20 bg-background">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-6 pb-16">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -434,7 +459,7 @@ export default function Portfolio() {
 
       {/* Projects Section */}
       <section id="projects" className="relative py-20 bg-secondary/20">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-6 pb-16">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -442,7 +467,7 @@ export default function Portfolio() {
             viewport={{ once: true }}
             className="text-3xl font-bold mb-12 text-center"
           >
-            Featured Projects
+            Academic Projects
           </motion.h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
@@ -453,22 +478,22 @@ export default function Portfolio() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card>
+                <Card className="flex flex-col h-full">
                   <Image
                     src={project.image}
                     alt={project.title}
                     width={400}
                     height={300}
-                    className="w-full h-48 object-cover rounded-t-lg"
+                    className="w-full h-64 object-cover rounded-t-lg" // Changed h-48 to h-64
                   />
                   <CardHeader>
-                    <CardTitle>{project.title}</CardTitle>
+                    <CardTitle className="text-xl">{project.title}</CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground mb-4">
+                  <CardContent className="flex-grow">
+                    <p className="text-muted-foreground mb-4 line-clamp-3">
                       {project.description}
                     </p>
-                    <div className="mb-4">
+                    <div className="flex flex-wrap">
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
@@ -478,14 +503,6 @@ export default function Portfolio() {
                         </span>
                       ))}
                     </div>
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:text-primary/80 transition-colors flex items-center"
-                    >
-                      View Project <ExternalLink className="ml-2 w-4 h-4" />
-                    </a>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -497,7 +514,7 @@ export default function Portfolio() {
 
       {/* Certificates Section */}
       <section id="certificates" className="relative py-20 bg-background">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-6 pb-16">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
