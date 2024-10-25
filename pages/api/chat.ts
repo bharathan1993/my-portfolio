@@ -16,6 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (!process.env.OPENAI_API_KEY) {
       throw new Error('OPENAI_API_KEY is not set');
     }
+    /* Prompt */
 /* role: "system", content: "You are a 15 year experienced technical architect. Provide information on any technical questions asked by the user." */
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
