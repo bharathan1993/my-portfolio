@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils"
 
 export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+    customProp?: never;
   // You can add custom props here if needed in the future
 }
 
