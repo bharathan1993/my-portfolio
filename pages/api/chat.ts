@@ -38,7 +38,7 @@ Bharathan Alwarsamy is a solution consultant and technical account management pr
 
 Before Zuora, Bharathan worked as a Customer Success Engineer (Technical) at Zoho Corporation Pvt Ltd., another SaaS-based product company. At Zoho, he worked with a wide range of products, including CRM, project management, subscription, analytics and DMS. 
 
-His responsibilities at Zoho included:
+His responsibilities at Zoho included the following : 
 
 * Understanding business pain points and assisting the sales team.
 * Assisting the marketing team with trend analysis.
