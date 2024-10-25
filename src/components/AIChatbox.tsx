@@ -13,11 +13,11 @@ const AIChatbox: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
-    function toggleExpand(event: React.MouseEvent<HTMLButtonElement>): void {
+    function toggleExpand(): void {
         setIsExpanded(!isExpanded);
     }
 
-    function handleMinimize(event: React.MouseEvent<HTMLButtonElement>): void {
+    function handleMinimize(): void {
       if (isExpanded) {
         setIsExpanded(false);
       } else {
@@ -25,7 +25,7 @@ const AIChatbox: React.FC = () => {
       }
     }
 
-    function handleClear(event: React.MouseEvent<HTMLButtonElement>): void {
+    function handleClear(): void {
         setMessages([]);
         setInput('');
     }
@@ -98,7 +98,7 @@ const AIChatbox: React.FC = () => {
           <CardHeader className="flex flex-row items-center justify-between p-2 bg-primary text-primary-foreground">
             <CardTitle className="flex items-center space-x-2 text-lg">
               <Lamp className="w-4 h-4" />
-              <span>Bharathan's Genie</span>
+              <span>Bharathan&apos;s Genie</span>
             </CardTitle>
             <div className="flex items-center space-x-2">
               <Button variant="ghost" size="sm" onClick={toggleExpand} className="text-primary-foreground hover:bg-primary/90">
