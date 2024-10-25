@@ -13,7 +13,7 @@ const ConfirmationMessage: React.FC = () => {
       <div className="bg-white text-black p-6 rounded-lg shadow-lg max-w-md text-center">
         <h2 className="text-2xl font-semibold mb-4">Thank You!</h2>
         <p className="text-lg">I appreciate you contacting me.</p>
-        <p className="text-lg mb-4">I'll get back to you shortly!</p>
+        <p className="text-lg mb-4">I&apos;ll get back to you shortly!</p>
       </div>
     </motion.div>
   );

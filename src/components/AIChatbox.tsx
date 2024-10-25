@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Lamp, Maximize2, Minimize2, Minus, Trash, ArrowRight, Sparkles } from 'lucide-react';
+import { Lamp, Maximize2, Minimize2, Minus, Trash, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import AIChatbox from '@/components/AIChatbox';
@@ -12,10 +12,6 @@ import {
   Award,
   Send,
   Briefcase,
-  Lamp,
-  Maximize2,
-  Minimize2,
-  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
