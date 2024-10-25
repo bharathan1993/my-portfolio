@@ -31,27 +31,30 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
+import ConfirmationMessage from '@/components/ConfirmationMessage';
 
 const MotionSpan = motion.span;
 
 export default function Portfolio() {
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const [animationKey, setAnimationKey] = useState(0);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const skills = [
     "Solution Consulting",
     "Customer Success Management",
-    "SQL",
-    "REST APIs",
     "Product Configuration",
+    "SQL",
     "Technical Communication",
     "Business Development",
     "Trend Analysis",
-    "Java (Basic)",
-    "Python (Basic)",
-    "Strategic Planning",
-    "Workshop Facilitation",
+    "REST APIs",
+    "Strategic Planning", 
     "Zuora Billing",
+    "Zuora Revenue (Basic)",
+    "Python (Basic)",
+    "Workshop Facilitation",
     "Architecture Design",
     "Product Webinars",
     "Business Presentations"
@@ -152,12 +155,39 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
     { id: "contact", title: "Contact" },
   ];
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Here you would typically handle the form submission,
-    // such as sending the data to an API
-    console.log("Form submitted");
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const message = formData.get('message') as string;
+  
+    // Show confirmation message immediately
+    setShowConfirmation(true);
     setIsContactOpen(false);
+  
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Optionally, you can show an error message to the user here
+      // For example: setErrorMessage('Failed to send message. Please try again later.');
+      setErrorMessage('Failed to send message. Please try again later.');
+      setShowConfirmation(false);
+    } finally {
+      // Hide confirmation message after 3 seconds, regardless of success or failure
+      setTimeout(() => setShowConfirmation(false), 3000);
+    }
   };
 
   const resetAnimation = () => {
@@ -255,7 +285,7 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl md:text-2xl mb-8 text-muted-foreground"
           >
-            Technical Account Manager | AI Enthusiast 
+            Technical Account Manager | Customer Success Professional
           </motion.p>
           <motion.div
             initial={{ opacity: 0 }}
@@ -275,24 +305,28 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
                     possible.
                   </DialogDescription>
                 </DialogHeader>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <Label htmlFor="name">Name</Label>
-                    <Input id="name" required />
-                  </div>
-                  <div>
-                    <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" required />
-                  </div>
-                  <div>
-                    <Label htmlFor="message">Message</Label>
-                    <Textarea id="message" required />
-                  </div>
-                  <Button type="submit" className="w-full">
-                    Send Message
-                    <Send className="ml-2 h-4 w-4" />
-                  </Button>
-                </form>
+       <form onSubmit={handleSubmit} className="space-y-4">
+  <div>
+    <Label htmlFor="name-inline">Name</Label>
+    <Input id="name-inline" name="name" required />
+  </div>
+  <div>
+    <Label htmlFor="email-inline">Email</Label>
+    <Input id="email-inline" name="email" type="email" required />
+  </div>
+  <div>
+    <Label htmlFor="message-inline">Message</Label>
+    <Textarea id="message-inline" name="message" required />
+  </div>
+  <motion.button
+    type="submit"
+    className="w-full bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2"
+    whileTap={{ scale: 0.95 }}
+  >
+    Send Message
+    <Send className="ml-2 h-4 w-4" />
+  </motion.button>
+</form>
               </DialogContent>
             </Dialog>
             
@@ -602,10 +636,14 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
                   <Label htmlFor="message-inline">Message</Label>
                   <Textarea id="message-inline" required />
                 </div>
-                <Button type="submit" className="w-full">
+                <motion.button
+                  type="submit"
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2"
+                  whileTap={{ scale: 0.95 }}
+                >
                   Send Message
                   <Send className="ml-2 h-4 w-4" />
-                </Button>
+                </motion.button>
               </form>
             </div>
           </motion.div>
@@ -622,6 +660,10 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
         </div>
       </footer>
       <AIChatbox />
+      {showConfirmation && <ConfirmationMessage />}
+      {errorMessage && (
+        <div className="text-red-500 mt-2">{errorMessage}</div>
+      )}
     </div>
   );
 }
