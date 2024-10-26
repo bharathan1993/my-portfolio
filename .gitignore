@@ -32,7 +32,7 @@ yarn-error.log*
 .vercel
 
 #chat.ts
-chat.ts
+pages/api/chat.ts
 
 # typescript
 *.tsbuildinfo
