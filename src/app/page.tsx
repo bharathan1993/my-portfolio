@@ -230,7 +230,7 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="text-xl font-bold text-primary">Who I</span>
+              <span className="text-xl font-bold text-primary">Who I Am</span>
             </motion.div>
             {isMobile ? (
               <Button variant="ghost" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
@@ -444,12 +444,12 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
               <p className="text-lg mb-6 text-muted-foreground">
                 I'm Bharathan Alwarsamy, a Solution Consultant and Technical Account Manager with over seven years in SaaS consulting and business development. At Zuora Inc., I help enterprise and mid-market clients optimize their order-to-cash workflows through tailored solutions and best practices.
               </p>
-              <p className="text-lg mb-6 text-muted-foreground">
+             {/* <p className="text-lg mb-6 text-muted-foreground">
                 Previously, as a Customer Success Engineer at Zoho, I worked across CRM, analytics, and project management tools, bridging customer needs with product teams to enhance user experience. This role sharpened my technical and communication skills, building a foundation for impactful client partnerships.
               </p>
               <p className="text-lg text-muted-foreground">
                 With skills in SQL, REST APIs, and a background in Python, I blend technical expertise with strategic insight. I hold an MBA in Operations and a degree in Computer Science, and I'm passionate about continuous growth and delivering value-driven solutions.
-              </p>
+              </p> */}
             </motion.div>
           </div>
         </div>
@@ -666,19 +666,17 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
             </p>
             <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="name-inline">Name</Label>
-                    <Input id="name-inline" required />
-                  </div>
-                  <div>
-                    <Label htmlFor="email-inline">Email</Label>
-                    <Input id="email-inline" type="email" required />
-                  </div>
+                <div>
+                  <Label htmlFor="name-inline">Name</Label>
+                  <Input id="name-inline" name="name" required />
+                </div>
+                <div>
+                  <Label htmlFor="email-inline">Email</Label>
+                  <Input id="email-inline" name="email" type="email" required />
                 </div>
                 <div>
                   <Label htmlFor="message-inline">Message</Label>
-                  <Textarea id="message-inline" required />
+                  <Textarea id="message-inline" name="message" required />
                 </div>
                 <motion.button
                   type="submit"
