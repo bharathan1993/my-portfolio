@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import AIChatbox from '@/components/AIChatbox';
@@ -12,6 +12,8 @@ import {
   Award,
   Send,
   Briefcase,
+  Menu,
+  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -31,11 +33,30 @@ import ConfirmationMessage from '@/components/ConfirmationMessage';
 
 const MotionSpan = motion.span;
 
+// Define the type for a section
+interface Section {
+  id: string;
+  title: string;
+}
+
 export default function Portfolio() {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [animationKey, setAnimationKey] = useState(0);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize(); // Set initial state
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const skills = [
     "Solution Consulting",
@@ -141,11 +162,11 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
       description: "Managed the presales lifecycle by decoding requirements and conducting client clarification sessions. Developed RFP documentation and created impactful sales presentations. Collaborated with marketing to align strategies with organizational goals and prepared Business Requirement Documents with cross-functional teams. Assisted the CTO in responding to RFIs, RFPs, and RFQs, and highlighted the company’s technical capabilities through presentations."},
   ];
 
-  const sections = [
+  const sections: Section[] = [
     { id: "home", title: "Home" },
     { id: "about", title: "About" },
     { id: "skills", title: "Skills" },
-    { id: "experience", title: "Experience" }, // Added this line
+    { id: "experience", title: "Experience" },
     { id: "projects", title: "Projects" },
     { id: "certificates", title: "Certificates" },
     { id: "contact", title: "Contact" },
@@ -202,43 +223,68 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
       {/* Navigation */}
       <nav className="sticky top-0 z-50 w-full backdrop-blur-sm bg-background/80 shadow-sm">
-        <div className="container mx-auto px-6 py-3 mt-4">
-          <div className="flex flex-col sm:flex-row justify-between items-center">
+        <div className="container mx-auto px-6 py-3">
+          <div className="flex justify-between items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="text-2xl font-bold">Who I Am</span>
+              <span className="text-xl font-bold text-primary">Who I Am</span>
             </motion.div>
+            {isMobile ? (
+              <Button variant="ghost" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+                {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </Button>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                className="flex space-x-6"
+              >
+                {sections.map((section) => (
+                  <a
+                    key={section.id}
+                    href={`#${section.id}`}
+                    className="hover:text-primary transition-colors"
+                    onClick={() => handleNavClick(section.id)}
+                  >
+                    {section.title}
+                  </a>
+                ))}
+              </motion.div>
+            )}
+          </div>
+          {isMobile && isMobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex space-x-6"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="mt-4 space-y-2"
             >
               {sections.map((section) => (
                 <a
                   key={section.id}
                   href={`#${section.id}`}
-                  className="hover:text-primary transition-colors"
-                  onClick={(e) => {
-                    e.preventDefault();
+                  className="block py-2 hover:text-primary transition-colors"
+                  onClick={() => {
                     handleNavClick(section.id);
+                    setIsMobileMenuOpen(false);
                   }}
                 >
                   {section.title}
                 </a>
               ))}
             </motion.div>
-          </div>
+          )}
         </div>
       </nav>
 
       {/* Hero Section */}
       <section
         id="home"
-        className="relative h-[calc(100vh-64px)] flex items-center justify-center"
+        className="relative min-h-screen pt-20 flex items-center justify-center"
       >
         <div className="container mx-auto px-6 text-center">
           <motion.div
@@ -302,13 +348,15 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
                   </DialogDescription>
                 </DialogHeader>
        <form onSubmit={handleSubmit} className="space-y-4">
-  <div>
-    <Label htmlFor="name-inline">Name</Label>
-    <Input id="name-inline" name="name" required />
-  </div>
-  <div>
-    <Label htmlFor="email-inline">Email</Label>
-    <Input id="email-inline" name="email" type="email" required />
+  <div className="space-y-4"> {/* Changed from grid to vertical layout */}
+    <div>
+      <Label htmlFor="name-inline">Name</Label>
+      <Input id="name-inline" name="name" required />
+    </div>
+    <div>
+      <Label htmlFor="email-inline">Email</Label>
+      <Input id="email-inline" name="email" type="email" required />
+    </div>
   </div>
   <div>
     <Label htmlFor="message-inline">Message</Label>
@@ -393,7 +441,7 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="w-full md:w-2/3"
+              className="w-full md:w-2/3 space-y-4"
             >
               <p className="text-lg mb-6 text-muted-foreground">
                 I'm Bharathan Alwarsamy, a Solution Consultant and Technical Account Manager with over seven years in SaaS consulting and business development. At Zuora Inc., I help enterprise and mid-market clients optimize their order-to-cash workflows through tailored solutions and best practices.
@@ -422,7 +470,7 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
           >
             Skills & Technologies
           </motion.h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             {skills.map((skill, index) => (
               <motion.div
                 key={skill}
@@ -499,7 +547,7 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
           >
             Academic Projects
           </motion.h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <motion.div
                 key={project.title}
@@ -554,7 +602,7 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
           >
             Certificates
           </motion.h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {certificates.map((certificate, index) => (
               <motion.div
                 key={certificate.title}
@@ -618,7 +666,7 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
               I&apos;m always open to new opportunities and collaborations. Feel
               free to reach out!
             </p>
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <Label htmlFor="name-inline">Name</Label>

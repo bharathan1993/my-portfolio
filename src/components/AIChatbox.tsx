@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Lamp, Maximize2, Minimize2, Minus, Trash, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import GeniePointer from './GeniePointer';
 
 const AIChatbox: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -65,36 +66,10 @@ const AIChatbox: React.FC = () => {
 
   return (
     <div className={`fixed ${isExpanded ? 'inset-0 flex items-center justify-center bg-black bg-opacity-50' : 'bottom-4 right-4'}`}>
-      {!isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="absolute bottom-20 right-20"
-        >
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="bg-blue-600 rounded-full shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer animate-pulse"
-            onClick={() => setIsOpen(true)}
-          >
-            <div className="px-3 py-1.5 text-white font-medium text-xs rounded-full flex items-center space-x-1">
-              <span>Try This</span>
-              <Sparkles className="w-2.5 h-2.5 ml-0.5" />
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
       {!isOpen ? (
-        <Button onClick={() => setIsOpen(true)} className="p-0 bg-transparent hover:bg-transparent">
-          <Image
-            src="/genie-im.png"
-            alt="Chat with Genie"
-            width={90}
-            height={90}
-          />
-        </Button>
+        <GeniePointer onClick={() => setIsOpen(true)} />
       ) : (
-        <Card className={`${isExpanded ? 'w-full max-w-5xl h-[80vh]' : 'w-[500px] h-[400px]'} flex flex-col shadow-lg`}>
+        <Card className={`${isExpanded ? 'w-full max-w-5xl h-[80vh]' : 'w-full sm:w-[500px] h-[400px]'} flex flex-col shadow-lg`}>
           <CardHeader className="flex flex-row items-center justify-between p-2 bg-primary text-primary-foreground">
             <CardTitle className="flex items-center space-x-2 text-lg">
               <Lamp className="w-4 h-4" />

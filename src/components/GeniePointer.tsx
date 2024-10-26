@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 interface GeniePointerProps {
   onClick: () => void;
@@ -7,17 +8,27 @@ interface GeniePointerProps {
 
 const GeniePointer: React.FC<GeniePointerProps> = ({ onClick }) => {
   return (
-    <div 
-      className="fixed bottom-16 right-16 animate-bounce cursor-pointer"
+    <motion.div 
+      className="fixed bottom-5 right-5 cursor-pointer"
       onClick={onClick}
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ duration: 0.5, type: "spring", stiffness: 260, damping: 20 }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
     >
-      <Image
-        src="/genie.png"
-        alt="Chat with Genie"
-        width={80}
-        height={80}
-      />
-    </div>
+      <motion.div
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <Image
+          src="/genie-im.png"
+          alt="Chat with Genie"
+          width={60}
+          height={60}
+        />
+      </motion.div>
+    </motion.div>
   );
 };
 
