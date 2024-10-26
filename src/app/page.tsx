@@ -230,7 +230,7 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="text-xl font-bold text-primary">Who I Am</span>
+              <span className="text-xl font-bold text-primary">Who I</span>
             </motion.div>
             {isMobile ? (
               <Button variant="ghost" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
@@ -348,15 +348,13 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
                   </DialogDescription>
                 </DialogHeader>
        <form onSubmit={handleSubmit} className="space-y-4">
-  <div className="space-y-4"> {/* Changed from grid to vertical layout */}
-    <div>
-      <Label htmlFor="name-inline">Name</Label>
-      <Input id="name-inline" name="name" required />
-    </div>
-    <div>
-      <Label htmlFor="email-inline">Email</Label>
-      <Input id="email-inline" name="email" type="email" required />
-    </div>
+  <div>
+    <Label htmlFor="name-inline">Name</Label>
+    <Input id="name-inline" name="name" required />
+  </div>
+  <div>
+    <Label htmlFor="email-inline">Email</Label>
+    <Input id="email-inline" name="email" type="email" required />
   </div>
   <div>
     <Label htmlFor="message-inline">Message</Label>
@@ -668,13 +666,15 @@ technologies: ["Market Research", "Competitive Strategy", "Data Analysis"],
             </p>
             <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <Label htmlFor="name-inline">Name</Label>
-                  <Input id="name-inline" required />
-                </div>
-                <div>
-                  <Label htmlFor="email-inline">Email</Label>
-                  <Input id="email-inline" type="email" required />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="name-inline">Name</Label>
+                    <Input id="name-inline" required />
+                  </div>
+                  <div>
+                    <Label htmlFor="email-inline">Email</Label>
+                    <Input id="email-inline" type="email" required />
+                  </div>
                 </div>
                 <div>
                   <Label htmlFor="message-inline">Message</Label>
